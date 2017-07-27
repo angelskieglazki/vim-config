@@ -201,19 +201,19 @@ set tabstop=8
 set expandtab                   " tabs are replaced with spacing
 
 
-function TabToggle()
-  if &expandtab
-    set shiftwidth=8
-    set softtabstop=0
-    set noexpandtab
-  else
-    set shiftwidth=2
-    set softtabstop=2
-    set expandtab
-  endif
-endfunction
+"function TabToggle()
+"  if &expandtab
+"    set shiftwidth=8
+"    set softtabstop=0
+"    set noexpandtab
+"  else
+"    set shiftwidth=2
+"    set softtabstop=2
+"    set expandtab
+"  endif
+"endfunction
 
-nmap <F5> mz:execute TabToggle()<CR>
+"nmap <F5> mz:execute TabToggle()<CR>
 
 
 " ================ Turn Off Swap Files ==============
@@ -476,3 +476,5 @@ set tabstop=8
 set shiftwidth=8
 highlight ColorColumn ctermbg=darkred
 set colorcolumn=80
+nnoremap <F10> :set hlsearch!<CR>
+let NERDTreeIgnore = ['cscope*']
