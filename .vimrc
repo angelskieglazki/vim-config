@@ -4,6 +4,7 @@ filetype off                  " required!
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'rhysd/vim-clang-format'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -478,3 +479,11 @@ highlight ColorColumn ctermbg=darkred
 set colorcolumn=80
 nnoremap <F10> :set hlsearch!<CR>
 let NERDTreeIgnore = ['cscope*']
+let g:clang_format#style_options = {
+            \ "BasedOnStyle" : "LLVM",
+            \ "IndentWidth" : 8, 
+            \ "UseTab" : "Always", 
+            \ "BreakBeforeBraces" : "Linux", 
+            \ "AllowShortIfStatementsOnASingleLine" : "false", 
+            \ "IndentCaseLabels" : "false" }
+
