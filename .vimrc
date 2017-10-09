@@ -73,7 +73,7 @@ call plug#end()
 
 filetype plugin indent on     " required!
 
-map <C-t> :NERDTreeToggle<CR>
+map <C-r> :NERDTreeToggle<CR>
 set smarttab
 set expandtab
 set smartindent
@@ -466,7 +466,7 @@ endif
 " Use .clang-format config for style
 let g:clang_format#detect_style_file=1
 map <C-u> :ClangFormat<CR>
-map <C-]> :VimShellTab<CR>
+map <C-y> :VimShellTab<CR>
 colors jellybeans
 " :highlight Pmenu    ctermbg=darkgray
 " :highlight PmenuSel ctermbg=brown
@@ -481,8 +481,8 @@ nnoremap <F10> :set hlsearch!<CR>
 let NERDTreeIgnore = ['cscope*']
 let g:clang_format#style_options = {
             \ "BasedOnStyle" : "LLVM",
-            \ "IndentWidth" : 8, 
-            \ "UseTab" : "Always", 
+            \ "IndentWidth" : 8,
+            \ "UseTab" : "Always",
             \ "BreakBeforeBraces" : "Linux", 
             \ "AllowShortIfStatementsOnASingleLine" : "false", 
             \ "IndentCaseLabels" : "false" }
