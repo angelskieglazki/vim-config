@@ -22,7 +22,8 @@ set comments=sl:/*,mb:\ *,elx:\ */
 set t_Co=256
 set colorcolumn=80
 syntax on
-color dracula
+set background=dark
+colorscheme PaperColor
 
 set backspace=indent,eol,start
 set t_kD=^[[3~
@@ -35,7 +36,10 @@ Plug 'scrooloose/nerdtree'            " Project and file navigation
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
-Plug 'dracula/vim', { 'as': 'dracula' }
+
+
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/c-syntax.vim'
 call plug#end()
 
 map <C-n> :NERDTreeToggle<CR>
