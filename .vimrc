@@ -22,11 +22,13 @@ set comments=sl:/*,mb:\ *,elx:\ */
 set t_Co=256
 set colorcolumn=80
 syntax on
+set syntax=c
 set background=dark
 colorscheme PaperColor
 
 set backspace=indent,eol,start
 set t_kD=^[[3~
+
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'            " Project and file navigation
@@ -37,12 +39,22 @@ Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
 
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'NLKNguyen/c-syntax.vim'
 call plug#end()
 
-map <C-n> :NERDTreeToggle<CR>
+
+"let g:ycm_global_ycm_extra_conf = '/home/max/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 1
+"let g:ycm_extra_conf_globlist = ['~/dev/*','!~/*']
+" make YCM compatible with UltiSnips (using supertab)	
+
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+map <C-r> :NERDTreeToggle<CR>
 
 
 
