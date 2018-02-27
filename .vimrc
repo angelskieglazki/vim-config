@@ -36,14 +36,36 @@ Plug 'scrooloose/nerdtree'            " Project and file navigation
 
 " autocompletion
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
-
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'NLKNguyen/c-syntax.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'itchyny/lightline.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+"git
+Plug 'airblade/vim-gitgutter'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+
+"LUL
+
 call plug#end()
+
+let g:lightline = {
+     \ 'colorscheme': 'seoul256',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
 
 
 "let g:ycm_global_ycm_extra_conf = '/home/max/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
@@ -54,10 +76,21 @@ let g:ycm_confirm_extra_conf = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Ctrl-T - открыть окно ctags
+nmap <C-t> :TagbarToggle<cr>
+imap <C-t> <esc>:TagbarToggle<cr>i<right>
+
 map <C-r> :NERDTreeToggle<CR>
 
-
-
+set path=/usr/include,/usr/local/include
+set tags=./tags,tags;
+let g:include_paths = "/usr/include/,/usr/local/include/" 
 
 " Enhanced keyboard mappings
 "
@@ -69,12 +102,13 @@ imap <F2> <ESC>:w<CR>i
 map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 " recreate tags file with F5
 map <F5> :!ctags -R –c++-kinds=+p –fields=+iaS –extra=+q .<CR>
-" create doxygen comment
-map <F6> :Dox<CR>
+" create YCM config
+map <F6> :YcmGenerateConfig<CR>
 " build using makeprg with <F7>
 map <F7> :make<CR>
 " build using makeprg with <S-F7>
 map <S-F7> :make clean all<CR>
+map <F9> :YcmCompleter GoToInclude<CR>
 " goto definition with F12
 map <F12> <C-]>
 " in diff mode we use the spell check keys for merging
@@ -93,3 +127,7 @@ else
   map <M-Down> ]s
   map <M-Up> [s
 endif
+
+
+
+set nospell
