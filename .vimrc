@@ -40,12 +40,13 @@ Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'vim-scripts/EasyPeasy'
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'NLKNguyen/c-syntax.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'itchyny/lightline.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 "git
 Plug 'airblade/vim-gitgutter'
@@ -89,8 +90,10 @@ imap <C-t> <esc>:TagbarToggle<cr>i<right>
 map <C-r> :NERDTreeToggle<CR>
 
 set path=/usr/include,/usr/local/include
-set tags=./tags,tags;
+set tags=./tags,tags;$HOME
 let g:include_paths = "/usr/include/,/usr/local/include/" 
+let g:tag_directory = "~/.vim/tags/"
+let g:lvimrc_filename = ".lvimrc"
 
 " Enhanced keyboard mappings
 "
