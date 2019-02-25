@@ -53,8 +53,13 @@ Plugin 'dyng/ctrlsf.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/DrawIt'
+
+" FIXME NEED TO CONFIGURATION
 Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
 Plugin 'derekwyatt/vim-protodef'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
@@ -63,7 +68,6 @@ Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'Evalir/dosbox-vim-colorscheme'
-Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plugin 'itchyny/landscape.vim'
 Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'bfrg/vim-cpp-modern'
@@ -129,7 +133,7 @@ let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
-" <<
+"<<
 
 " >>
 " 代码折叠
@@ -140,14 +144,15 @@ set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
 
-" <<
-
-" >>
-" 接口与实现快速切换
-
-" *.cpp 和 *.h 间切换
+" switch header/source FIXME: need configuration
 nmap <silent> <Leader>sw :FSHere<cr>
 
+
+nmap <silent> <F1> :call HLMarks("Marks")<CR>
+nmap <silent> <F2> :call clearmatches()<CR>
+nmap <silent> <Leader><F2> :call clearmatches()\|:delmarks a-z<CR>
+nmap <silent> <F5> :call AddHLMark("Marks")<CR>
+nmap <silent> <Leader><F5> :call DelHLMark("Marks")<CR>
 " <<
 
 " >>
@@ -258,14 +263,7 @@ nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
 nnoremap <Leader>sp :CtrlSF<CR>
 
-" <<
-
-" >>
-" 内容替换
-
-" 快捷替换
-let g:multi_cursor_next_key='<S-n>'
-let g:multi_cursor_skip_key='<S-k>'
+" multicursor
 
 " 精准替换
 " 替换函数。参数说明：
