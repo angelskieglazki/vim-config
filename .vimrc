@@ -71,6 +71,7 @@ Plugin 'Evalir/dosbox-vim-colorscheme'
 Plugin 'itchyny/landscape.vim'
 Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'bfrg/vim-cpp-modern'
+Plugin 'rhysd/vim-clang-format'
 call vundle#end()
 filetype plugin indent on
 
@@ -81,6 +82,12 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=m
 set guioptions-=T
+
+let g:clang_format#detect_style_file = 1
+"let g:clang_format#code_style = "llvm"
+"let g:clang_format#style_options = {
+"            \ "Standard" : "C++11",
+"            \ "BreakBeforeBraces" : "Linux"}
 
 fun! ToggleFullscreen()
 	call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
