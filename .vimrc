@@ -309,9 +309,8 @@ nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' wi
 " 模板补全
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
-let g:UltiSnipsExpandTrigger="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+let g:UltiSnipsExpandTrigger="<C-z>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
 
 " >>
 " YCM 补全
@@ -444,4 +443,7 @@ set t_Co=256   " This is may or may not needed.
 set background=dark
 colorscheme landscape 
 
+"set pastetoggle=<F10>
+set nosmarttab
 
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
