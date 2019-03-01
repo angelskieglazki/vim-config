@@ -108,6 +108,7 @@ set nowrap
 
 let g:Powerline_colorscheme='solarized256'
 
+let g:multi_cursor_quit_key = '<C-q>'
 " <<
 
 " >>
@@ -444,4 +445,7 @@ set t_Co=256   " This is may or may not needed.
 set background=dark
 colorscheme landscape 
 
-
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%101v.\+/
+highlight ColorColumn ctermbg=red
+set colorcolumn=100

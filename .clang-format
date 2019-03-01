@@ -4,6 +4,7 @@ Language:        Cpp
 IndentWidth: 2
 PointerAlignment: Left
 SortIncludes: false
+AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterClass:      false
