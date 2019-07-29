@@ -1,37 +1,33 @@
 let mapleader=";"
 set backspace=indent,eol,start
 set t_kD=^[[3~
-let NERDTreeIgnore = ['\.o$']
-let g:include_paths = "/usr/include/,/usr/local/include/,/usr/include/c++/8/"
-set path=/usr/include,/usr/local/include
+let NERDTreeIgnore = ['\.lo$', '\.o$', '\.swp$'] 
+
+
 filetype on
 filetype plugin on
 
 nmap LB 0
 nmap LE $
 
-vnoremap <Leader>y "+y
-nmap <Leader>p "+p
 nmap <Leader>q :q<CR>
 nmap <Leader>w :w<CR>
-nmap <Leader>WQ :wa<CR>:q<CR>
-nmap <Leader>Q :qa!<CR>
-
-nnoremap nw <C-W><C-W>
-nnoremap <Leader>lw <C-W>l
-nnoremap <Leader>hw <C-W>h
-nnoremap <Leader>kw <C-W>k
-nnoremap <Leader>jw <C-W>j
-nmap <Leader>M %
 
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
-inoremap <leader>; <C-x><C-o>
+
 set incsearch
 set ignorecase
 set nocompatible
 set wildmenu
 
+set foldmethod=syntax 
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
+
 filetype off
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -54,6 +50,9 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/DrawIt'
 
+"Doxygen plugin
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+
 " FIXME NEED TO CONFIGURATION
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -73,7 +72,25 @@ Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'bfrg/vim-cpp-modern'
 Plugin 'rhysd/vim-clang-format'
 call vundle#end()
-filetype plugin indent on
+
+"vim-scripts/DoxygenToolkit.vim
+"Create documentation for function
+nnoremap <Leader>dx :Dox<CR>
+
+"ericcurtin/CurtineIncSw.vim
+"switch beetween header/sourse c
+map <F4> :call CurtineIncSw()<CR>
+
+"derekwyatt/vim-fswitch
+"switch header/source cpp FIXME: need configuration
+nmap <silent> <Leader>sw :FSHere<cr>
+
+" nathanaelkane/vim-indent-guides
+let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+
 
 set gcr=a:block-blinkon0
 set guioptions-=l
@@ -83,19 +100,12 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=T
 
-let g:clang_format#detect_style_file = 1
-"let g:clang_format#code_style = "llvm"
-"let g:clang_format#style_options = {
-"            \ "Standard" : "C++11",
-"            \ "BreakBeforeBraces" : "Linux"}
+"fun! ToggleFullscreen()
+"	call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
+"endf
+"map <silent> <F11> :call ToggleFullscreen()<CR>
 
-fun! ToggleFullscreen()
-	call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
-endf
-map <silent> <F11> :call ToggleFullscreen()<CR>
-" switch between header/source with F4
-map <F4> :call CurtineIncSw()<CR>
-"autocmd VimEnter * call ToggleFullscreen()
+
 
 set laststatus=2
 set ruler
@@ -107,66 +117,24 @@ set guifont=YaHei\ Consolas\ Hybrid\ 10.5
 set nowrap
 
 let g:Powerline_colorscheme='solarized256'
-
 let g:multi_cursor_quit_key = '<C-q>'
-" <<
 
-" >>
-" 语法分析
 
-" 开启语法高亮功能
+filetype plugin indent on
 syntax enable
-" 允许用指定语法高亮配色方案替换默认方案
 syntax on
-
-" <<
-
-" >>
-" 缩进
-
-" 自适应不同语言的智能缩进
-filetype indent on
 
 set expandtab
 autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType c   setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-" 缩进可视化插件 Indent Guides
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=0
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=2
-" 色块宽度
-let g:indent_guides_guide_size=1
-" 快捷键 i 开/关缩进可视化
-nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
-"<<
-
-" >>
-" 代码折叠
-
-" 基于缩进或语法进行代码折叠
-"set foldmethod=indent
-set foldmethod=syntax
-" 启动 vim 时关闭折叠代码
-set nofoldenable
-
-" switch header/source FIXME: need configuration
-nmap <silent> <Leader>sw :FSHere<cr>
-
-
+"vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines
 nmap <silent> <F1> :call HLMarks("Marks")<CR>
 nmap <silent> <F2> :call clearmatches()<CR>
 nmap <silent> <Leader><F2> :call clearmatches()\|:delmarks a-z<CR>
 nmap <silent> <F5> :call AddHLMark("Marks")<CR>
 nmap <silent> <Leader><F5> :call DelHLMark("Marks")<CR>
-" <<
-
-" >>
-" 代码收藏
-
-" 自定义 vim-signature 快捷键
 let g:SignatureMap = {
         \ 'Leader'             :  "m",
         \ 'PlaceNextMark'      :  "m,",
