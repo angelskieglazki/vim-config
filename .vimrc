@@ -24,7 +24,7 @@ set foldmethod=syntax
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
-
+set hidden
 
 filetype off
 
@@ -34,26 +34,23 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/phd'
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'kshenoy/vim-signature'
-Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/indexer.tar.gz'
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/vimprj'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/DrawIt'
-
-"Doxygen plugin
 Plugin 'vim-scripts/DoxygenToolkit.vim'
+Plugin 'ericcurtin/CurtineIncSw.vim'
 
-" FIXME NEED TO CONFIGURATION
+
+" indexer, vimprj and DfrankUtil must used together
+"Plugin 'vim-scripts/indexer.tar.gz'
+"Plugin 'vim-scripts/vimprj'
+"Plugin 'vim-scripts/DfrankUtil'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
@@ -66,9 +63,7 @@ Plugin 'gcmt/wildfire.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'Evalir/dosbox-vim-colorscheme'
 Plugin 'itchyny/landscape.vim'
-Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'bfrg/vim-cpp-modern'
 Plugin 'rhysd/vim-clang-format'
 call vundle#end()
@@ -99,14 +94,6 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=m
 set guioptions-=T
-
-"fun! ToggleFullscreen()
-"	call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
-"endf
-"map <silent> <F11> :call ToggleFullscreen()<CR>
-
-
-
 set laststatus=2
 set ruler
 set number
@@ -119,7 +106,6 @@ set nowrap
 let g:Powerline_colorscheme='solarized256'
 let g:multi_cursor_quit_key = '<C-q>'
 
-
 filetype plugin indent on
 syntax enable
 syntax on
@@ -129,101 +115,14 @@ autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType c   setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
 
-"vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines
-nmap <silent> <F1> :call HLMarks("Marks")<CR>
-nmap <silent> <F2> :call clearmatches()<CR>
-nmap <silent> <Leader><F2> :call clearmatches()\|:delmarks a-z<CR>
-nmap <silent> <F5> :call AddHLMark("Marks")<CR>
-nmap <silent> <Leader><F5> :call DelHLMark("Marks")<CR>
-let g:SignatureMap = {
-        \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "m,",
-        \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "m-",
-        \ 'DeleteMark'         :  "dm",
-        \ 'PurgeMarks'         :  "mda",
-        \ 'PurgeMarkers'       :  "m<BS>",
-        \ 'GotoNextLineAlpha'  :  "']",
-        \ 'GotoPrevLineAlpha'  :  "'[",
-        \ 'GotoNextSpotAlpha'  :  "`]",
-        \ 'GotoPrevSpotAlpha'  :  "`[",
-        \ 'GotoNextLineByPos'  :  "]'",
-        \ 'GotoPrevLineByPos'  :  "['",
-        \ 'GotoNextSpotByPos'  :  "mn",
-        \ 'GotoPrevSpotByPos'  :  "mp",
-        \ 'GotoNextMarker'     :  "[+",
-        \ 'GotoPrevMarker'     :  "[-",
-        \ 'GotoNextMarkerAny'  :  "]=",
-        \ 'GotoPrevMarkerAny'  :  "[=",
-        \ 'ListLocalMarks'     :  "ms",
-        \ 'ListLocalMarkers'   :  "m?"
-        \ }
-
-" <<
-
-" >>
-" 标签列表
-
-" 设置 tagbar 子窗口的位置出现在主编辑区的左边
+" majutsushi/tagbar
 let tagbar_left=0
-" 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
 nnoremap <Leader>t :TagbarToggle<CR>
-" 设置标签子窗口的宽度
-let tagbar_width=32
-" tagbar 子窗口中不显示冗余帮助信息
-"let g:tagbar_compact=1
-" 设置 ctags 对哪些代码标识符生成标签
-"let g:tagbar_type_cpp = {
-"     \ 'ctagstype' : 'c++',
-"     \ 'kinds'     : [
-"         \ 'c:classes:0:1',
-"         \ 'd:macros:0:1',
-"         \ 'e:enumerators:0:0', 
-"         \ 'f:functions:0:1',
-"         \ 'g:enumeration:0:1',
-"         \ 'l:local:0:1',
-"         \ 'm:members:0:1',
-"         \ 'n:namespaces:0:1',
-"         \ 'p:functions_prototypes:0:1',
-"         \ 's:structs:0:1',
-"         \ 't:typedefs:0:1',
-"         \ 'u:unions:0:1',
-"         \ 'v:global:0:1',
-"         \ 'x:external:0:1'
-"     \ ],
-"     \ 'sro'        : '::',
-"     \ 'kind2scope' : {
-"         \ 'g' : 'enum',
-"         \ 'n' : 'namespace',
-"         \ 'c' : 'class',
-"         \ 's' : 'struct',
-"         \ 'u' : 'union'
-"     \ },
-"     \ 'scope2kind' : {
-"         \ 'enum'      : 'g',
-"         \ 'namespace' : 'n',
-"         \ 'class'     : 'c',
-"         \ 'struct'    : 's',
-"         \ 'union'     : 'u'
-"     \ }
-"\ }
+let tagbar_width=64
 
-" <<
+" dyng/ctrlsf.vim search in project
+nnoremap <Leader>sp :CtrlSF<CR>
 
-" >>
-" 代码导航
- 
-" 基于标签的代码导航
-
-" 设置插件 indexer 调用 ctags 的参数
-" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v
-" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
-let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-
-" 正向遍历同名标签
-nmap <Leader>tn :tnext<CR>
-" 反向遍历同名标签
-nmap <Leader>tp :tprevious<CR>
 
 " 基于语义的代码导航
 map <F9> :YcmCompleter GoToInclude<CR>
@@ -231,13 +130,6 @@ nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
-" <<
-
-" >>
-" 查找
-
-" 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
-nnoremap <Leader>sp :CtrlSF<CR>
 
 " multicursor
 
@@ -273,21 +165,20 @@ nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' wit
 nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 
-" <<
 
-" 模板补全
-" UltiSnips 的 tab 键与 YCM 冲突，重新设定
+" SirVer/ultisnips
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 let g:UltiSnipsExpandTrigger="<C-z>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
+
+
+
 
 " >>
 " YCM 补全
 
 
-
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
-
 highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 
 
@@ -344,7 +235,7 @@ nmap <Leader>man :Man 3 <cword><CR>
 
 nmap <Leader>fl :NERDTreeToggle<CR>
 
-let NERDTreeWinSize=22
+let NERDTreeWinSize=40
 
 let NERDTreeWinPos="left"
 
