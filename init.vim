@@ -49,6 +49,9 @@ Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call vundle#end()               " required
 
 filetype plugin indent on       " required
+syntax enable
+syntax on
+set expandtab
 
 
 " nathanaelkane/vim-indent-guides
@@ -134,3 +137,7 @@ hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 "colorscheme primary
 colorscheme z666
+
+autocmd FileType cpp setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType c   setlocal tabstop=4 shiftwidth=4 softtabstop=4
+
