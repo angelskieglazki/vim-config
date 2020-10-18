@@ -1,10 +1,12 @@
 [user]
 	name = max
 	email = mpano91@gmail.com
+	signingkey = 13045CC145CA3625
 [push]
 	default = simple
 [alias]
-	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+        hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+        remove-tags = "!f() { git tag -l ${1} | xargs -I % echo \"git tag -d % && git push --delete origin %\" | sh; }; f"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
