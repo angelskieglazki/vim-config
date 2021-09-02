@@ -17,7 +17,8 @@ Plugin 'kshenoy/vim-signature'
 Plugin 'preservim/tagbar'
 Plugin 'preservim/nerdtree'
 Plugin 'itchyny/landscape.vim'
-
+Plugin 'angelskieglazki/hcch.vim'
+Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Need to config
 Plugin 'preservim/nerdcommenter'
@@ -40,7 +41,7 @@ Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
 
 
 " ===================
@@ -100,11 +101,12 @@ nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
 highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 
-let g:ycm_clangd_binary_path = "/usr/bin/clangd-10"
+let g:ycm_clangd_binary_path = "/home/max/Documents/clang-llvm-11.0.0/bin/clangd"
 let g:ycm_complete_in_comments=1
+let g:ycm_goto_buffer_command = 'new-tab'
 
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
-let g:ycm_confirm_extra_conf=0
+"let g:ycm_confirm_extra_conf=0
 
 
 let g:ycm_collect_identifiers_from_tags_files=0
